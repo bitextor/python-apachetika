@@ -6,7 +6,7 @@ Java-based boilerpipe library[1] that it wraps.
 
 ================================================================================
 
- Copyright (c) 2013 Misja Hoebe
+ Copyright (c) 2013 Misja Hoebe; 2019 Leopoldo Pla, Bitextor Team
 
  The author licenses this file to You under the Apache License, Version 2.0
  (the "License"); you may not use this file except in compliance with

@@ -8,32 +8,25 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '1.3.0.0'
-boilerpipe_version = '1.2.0'
-DATAPATH = join(abspath(dirname((__file__))), 'src/boilerpipe/data')
+__version__ = '1.0.0.0'
+DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
-def download_jars(datapath, version=boilerpipe_version):
-    tgz_url = 'https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/boilerpipe/boilerpipe-{0}-bin.tar.gz'.format(version)
-    tgz_name = basename(tgz_url)
-    if not exists(tgz_name):
-        urlretrieve(tgz_url, tgz_name)
-    tar = tarfile.open(tgz_name, mode='r:gz')
-    for tarinfo in tar.getmembers():
-        if not fnmatch(tarinfo.name, '*.jar'):
-            continue
-        tar.extract(tarinfo, datapath)
+def download_jars(datapath):
+    jar_url = 'https://github.com/bitextor/pdf-extract/raw/master/runnable-jar/PDFExtract.jar'
+    jar_name = basename(jar_url)
+    if not exists(datapath+"/"+jar_name):
+        urlretrieve(jar_url, datapath+"/"+jar_name)
 
 download_jars(datapath=DATAPATH)
 
 setup(
-    name='boilerpipe',
+    name='pdfextract',
     version=__version__,
-    packages=['boilerpipe', 'boilerpipe.extract'],
+    packages=['pdfextract', 'pdfextract.extract'],
     package_dir={'': 'src'},
     package_data={
-        'boilerpipe': [
-            'data/boilerpipe-{version}/boilerpipe-{version}.jar'.format(version=boilerpipe_version),
-            'data/boilerpipe-{version}/lib/*.jar'.format(version=boilerpipe_version),
+        'pdfextract': [
+            'data/pdfextract/PDFExtract.jar'
         ],
     },
     install_requires=[
@@ -44,7 +37,7 @@ setup(
     author_email='misja.hoebe@gmail.com',
     maintainer='Matthew Russell',
     maintainer_email='ptwobrussell@gmail.com',
-    url='https://github.com/ptwobrussell/python-boilerpipe/',
+    url='https://github.com/ptwobrussell/python-pdfextract/',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -54,7 +47,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Natural Language :: English',
     ],
-    keywords='boilerpipe',
+    keywords='pdfextract',
     license='Apache 2.0',
-    description='Python interface to Boilerpipe, Boilerplate Removal and Fulltext Extraction from HTML pages'
+    description='Python interface to pdf-extract, HTML Extraction from PDF pages'
 )

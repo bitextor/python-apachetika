@@ -1,7 +1,7 @@
-# python-boilerpipe
+# python-pdfextract
 
 
-A python wrapper for [Boilerpipe](http://code.google.com/p/boilerpipe/), an excellent Java library for boilerplate removal and fulltext extraction from HTML pages.
+A python wrapper for [pdf-extract](https://github.com/bitextor/pdf-extract), a Java library for HTML extraction from PDF documents.
 
 ## Configuration
 
@@ -17,8 +17,8 @@ The boilerpipe jar files will get fetched and included automatically when buildi
 
 Checkout the code:
 
-	git clone https://github.com/misja/python-boilerpipe.git
-	cd python-boilerpipe
+	git clone https://github.com/misja/python-pdfextract.git
+	cd python-pdfextract
 
 
 **virtualenv**
@@ -40,31 +40,12 @@ Checkout the code:
 
 Be sure to have set `JAVA_HOME` properly since `jpype` depends on this setting.
 
-The constructor takes a keyword argment `extractor`, being one of the available boilerpipe extractor types:
-
- - DefaultExtractor
- - ArticleExtractor
- - ArticleSentencesExtractor
- - KeepEverythingExtractor
- - KeepEverythingWithMinKWordsExtractor
- - LargestContentExtractor
- - NumWordsRulesExtractor
- - CanolaExtractor
-
-If no extractor is passed the DefaultExtractor will be used by default. Additional keyword arguments are either `html` for HTML text or `url`.
-
-    from boilerpipe.extract import Extractor
-    extractor = Extractor(extractor='ArticleExtractor', url=your_url)
+    from pdfextract.extract import Extractor
+    extractor = Extractor(pdf=your_pdf_data)
 
 Then, to extract relevant content:
 
-    extracted_text = extractor.getText()
+    extracted_html = extractor.extract()
 
-    extracted_html = extractor.getHTML()
-
-
-For `KeepEverythingWithMinKWordsExtractor` we have to specify `kMin` parameter, which defaults to `1` for now:
-
-	extractor = Extractor(extractor='KeepEverythingWithMinKWordsExtractor', url=your_url, kMin=20)
 
 
