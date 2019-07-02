@@ -1,10 +1,3 @@
-This source code is licensed under the same Apache 2.0 license[2] as the 
-Java-based boilerpipe library[1] that it wraps.
-
-[1] http://www.apache.org/licenses/LICENSE-2.0
-[2] https://code.google.com/p/boilerpipe/
-
-================================================================================
 
  Copyright (c) 2013 Misja Hoebe; 2019 Leopoldo Pla, Bitextor Team
 

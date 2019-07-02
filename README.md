@@ -11,7 +11,7 @@ Dependencies:
  * jpype
  * chardet
 
-The boilerpipe jar files will get fetched and included automatically when building the package.
+The pdf-extract jar files will get fetched and included automatically when building the package.
 
 ## Installation
 
