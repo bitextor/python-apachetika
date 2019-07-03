@@ -1,10 +1,11 @@
-import jpype
+from jpype import *
 import chardet
 import threading
 
 lock = threading.Lock()
 
-ByteArrayInputStream        = jpype.JClass('java.io.ByteArrayInputStream')
+ByteArrayInputStream        = JClass('java.io.ByteArrayInputStream')
+
 
 class Extractor(object):
     extractor = None
@@ -15,22 +16,32 @@ class Extractor(object):
             self.data = kwargs['pdf']
         else:
             raise Exception('No pdf provided')
-
+        if "language" in kwargs:
+            self.language = kwargs['language']
+        else:
+            self.language = "en"
+        if "options" in kwargs:
+            self.options = kwargs['options']
+        else:
+            self.options = ""
+        if "debug" in kwargs:
+            self.debug = kwargs['debug']
+        else:
+            self.debug = 0
         try:
             # make it thread-safe
             if threading.activeCount() > 1:
-                if jpype.isThreadAttachedToJVM() == False:
-                    jpype.attachThreadToJVM()
+                if isThreadAttachedToJVM() == False:
+                    attachThreadToJVM()
             lock.acquire()
 
-            self.extractor = jpype.JClass(
-                    "com.java.app.PDFExtract").INSTANCE
+            self.extractor = JClass("com.java.app.PDFExtract")
 
         finally:
             lock.release()
 
-        reader = ByteArrayInputStream(self.data)
+        self.reader = ByteArrayInputStream(self.data)
 
     def getHTML(self):
-        return self.extractor.extract(self.reader)
+        return self.extractor.Extract(self.reader, JString(self.language), JString(self.options), self.debug)
 

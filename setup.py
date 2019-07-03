@@ -26,17 +26,17 @@ setup(
     package_dir={'': 'src'},
     package_data={
         'pdfextract': [
-            'data/pdfextract/PDFExtract.jar'
+            'data/PDFExtract.jar'
         ],
     },
     install_requires=[
         'JPype1',
         'chardet',
     ],
-    author='Misja Hoebe',
-    author_email='misja.hoebe@gmail.com',
-    maintainer='Matthew Russell',
-    maintainer_email='ptwobrussell@gmail.com',
+    author='Misja Hoebe, Leopoldo Pla',
+    author_email='misja.hoebe@gmail.com, lpla@dlsi.ua.es',
+    maintainer='Matthew Russell, Leopoldo Pla',
+    maintainer_email='ptwobrussell@gmail.com, lpla@dlsi.ua.es',
     url='https://github.com/ptwobrussell/python-pdfextract/',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
