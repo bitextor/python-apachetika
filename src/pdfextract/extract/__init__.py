@@ -5,6 +5,7 @@ import threading
 lock = threading.Lock()
 
 ByteArrayInputStream        = JClass('java.io.ByteArrayInputStream')
+ByteArrayOutputStream       = JClass('java.io.ByteArrayOutputStream')
 
 
 class Extractor(object):
@@ -35,7 +36,7 @@ class Extractor(object):
                     attachThreadToJVM()
             lock.acquire()
 
-            self.extractor = JClass("com.java.app.PDFExtract")
+            self.extractor = JClass("com.java.app.PDFExtract")()
 
         finally:
             lock.release()
@@ -43,5 +44,4 @@ class Extractor(object):
         self.reader = ByteArrayInputStream(self.data)
 
     def getHTML(self):
-        return self.extractor.Extract(self.reader, JString(self.language), JString(self.options), self.debug)
-
+        return str(self.extractor.Extract(self.reader, JString(self.language), JString(self.options), self.debug).toString())
