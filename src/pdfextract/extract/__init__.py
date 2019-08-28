@@ -15,8 +15,6 @@ class Extractor(object):
     def __init__(self, **kwargs):
         if 'pdf' in kwargs:
             self.data = kwargs['pdf']
-        else:
-            raise Exception('No pdf provided')
         if "language" in kwargs:
             self.language = kwargs['language']
         else:
@@ -41,7 +39,9 @@ class Extractor(object):
         finally:
             lock.release()
 
-        self.reader = ByteArrayInputStream(self.data)
+    def setData(data):
+        self.data = data
 
     def getHTML(self):
+        self.reader = ByteArrayInputStream(self.data)
         return str(self.extractor.Extract(self.reader, JString(self.language), JString(self.options), self.debug).toString())
