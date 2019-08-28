@@ -34,7 +34,7 @@ class Extractor(object):
                     attachThreadToJVM()
             lock.acquire()
 
-            self.extractor = JClass("com.java.app.PDFExtract")()
+            self.extractor = JClass("pdfextract.PDFExtract")()
 
         finally:
             lock.release()
