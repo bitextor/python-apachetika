@@ -39,7 +39,7 @@ class Extractor(object):
         finally:
             lock.release()
 
-    def setData(data):
+    def setData(self,data):
         self.data = data
 
     def getHTML(self):
