@@ -9,7 +9,7 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '1.0.0.0'
+__version__ = '1.0.0.1'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_jars(datapath):
@@ -38,7 +38,7 @@ setup(
     author_email='misja.hoebe@gmail.com, lpla@dlsi.ua.es',
     maintainer='Matthew Russell, Leopoldo Pla',
     maintainer_email='ptwobrussell@gmail.com, lpla@dlsi.ua.es',
-    url='https://github.com/ptwobrussell/python-pdfextract/',
+    url='https://github.com/bitextor/python-pdfextract/',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
