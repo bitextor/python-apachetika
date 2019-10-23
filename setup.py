@@ -9,7 +9,7 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '1.0.1.1'
+__version__ = '1.0.1.2'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_jars(datapath):
