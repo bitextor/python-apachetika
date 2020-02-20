@@ -1,8 +1,8 @@
 import tarfile
 from fnmatch import fnmatch
 from os.path import basename, exists, dirname, abspath, join
-#from distutils.core import setup
-from setuptools import setup
+from distutils.core import setup
+#from setuptools import setup
 
 try:
     from urllib import urlretrieve
