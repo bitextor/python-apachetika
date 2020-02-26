@@ -1,6 +1,8 @@
 import tarfile
 from fnmatch import fnmatch
+import shutil
 from os.path import basename, exists, dirname, abspath, join
+import subprocess
 from distutils.core import setup
 #from setuptools import setup
 
@@ -9,16 +11,22 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '1.0.1.2'
+__version__ = '2.0.0'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
-def download_jars(datapath):
-    jar_url = 'https://github.com/bitextor/pdf-extract/raw/master/runnable-jar/PDFExtract.jar'
+def download_or_compile_jars(datapath):
+    jar_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/runnable-jar/PDFExtract.jar'
+    setup_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/setup.sh'
     jar_name = basename(jar_url)
     if not exists(datapath+"/"+jar_name):
-        urlretrieve(jar_url, datapath+"/"+jar_name)
+        urlretrieve(setup_url, datapath+"/"+"setup.sh")
+        try:
+            subprocess.check_call(["bash",datapath+"/"+"setup.sh","compile"])
+            shutil.move('PDFExtract-2.0.jar', datapath+"/"+jar_name)
+        except:
+            urlretrieve(jar_url, datapath+"/"+jar_name)
 
-download_jars(datapath=DATAPATH)
+download_or_compile_jars(datapath=DATAPATH)
 
 setup(
     name='python-pdfextract',
