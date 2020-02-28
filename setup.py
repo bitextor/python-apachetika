@@ -16,13 +16,17 @@ DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_or_compile_jars(datapath):
     jar_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/runnable-jar/PDFExtract.jar'
+    config_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/runnable-jar/PDFExtract.json'
     setup_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/setup.sh'
     jar_name = basename(jar_url)
-    if not exists(datapath+"/"+jar_name):
+    config_name = basename(config_url)
+    if not exists(datapath+"/"+jar_name) or not exists(datapath+"/"+config_name):
         urlretrieve(setup_url, datapath+"/"+"setup.sh")
+        urlretrieve(config_url, datapath+"/"+config_name)
         try:
             subprocess.check_call(["bash",datapath+"/"+"setup.sh","compile"])
             shutil.move('PDFExtract-2.0.jar', datapath+"/"+jar_name)
+            
         except:
             urlretrieve(jar_url, datapath+"/"+jar_name)
 
