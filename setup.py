@@ -11,7 +11,7 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '2.0.0'
+__version__ = '2.0.1'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_or_compile_jars(datapath):
