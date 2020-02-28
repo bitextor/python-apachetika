@@ -39,7 +39,7 @@ setup(
     package_dir={'': 'src'},
     package_data={
         'pdfextract': [
-            'data/PDFExtract.jar'
+            'data/PDFExtract.jar',
             'data/PDFExtract.json'
         ],
     },
