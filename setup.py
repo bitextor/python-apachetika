@@ -40,6 +40,7 @@ setup(
     package_data={
         'pdfextract': [
             'data/PDFExtract.jar'
+            'data/PDFExtract.json'
         ],
     },
     install_requires=[
