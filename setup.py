@@ -2,6 +2,7 @@ import tarfile
 from fnmatch import fnmatch
 import shutil
 from os.path import basename, exists, dirname, abspath, join
+import os
 import subprocess
 from distutils.core import setup
 #from setuptools import setup
@@ -15,20 +16,20 @@ __version__ = '2.0.1'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_or_compile_jars(datapath):
-    jar_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/runnable-jar/PDFExtract.jar'
-    config_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/runnable-jar/PDFExtract.json'
-    setup_url = 'https://github.com/bitextor/pdf-extract/raw/poppler-rewrite/setup.sh'
-    jar_name = basename(jar_url)
-    config_name = basename(config_url)
-    if not exists(datapath+"/"+jar_name) or not exists(datapath+"/"+config_name):
-        urlretrieve(setup_url, datapath+"/"+"setup.sh")
-        urlretrieve(config_url, datapath+"/"+config_name)
-        try:
-            subprocess.check_call(["bash",datapath+"/"+"setup.sh","compile"])
-            shutil.move('PDFExtract-2.0.jar', datapath+"/"+jar_name)
+    if not exists(datapath+"/PDFExtract-2.0.jar") or not exists(datapath+"/PDFExtract.json"):
+        wd = os.getcwd()
+        if not exists(datapath+"/pdf-extract"):
+            subprocess.check_call(["git","clone","-b","poppler-rewrite","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
+        os.chdir(datapath+"/pdf-extract/cld3-Java")
+        subprocess.check_call(["ant", "jar"])
+        subprocess.check_call(["mvn", "install:install-file","-Dfile=cld3-java.jar","-DgroupId=cld3-java","-DartifactId=cld3-java","-Dversion=1.0","-Dpackaging=jar"])
+        os.chdir(datapath+"/pdf-extract")
+        subprocess.check_call(["mvn", "package"])
+        os.chdir(wd)
+        shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract-2.0.jar")
+        shutil.move(datapath+'/pdf-extract/target/PDFExtract.json', datapath+"/PDFExtract.json")
             
-        except:
-            urlretrieve(jar_url, datapath+"/"+jar_name)
+            
 
 download_or_compile_jars(datapath=DATAPATH)
 
