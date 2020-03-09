@@ -19,6 +19,10 @@ class Extractor(object):
             self.keepBrTags = kwargs['keepBrTags']
         else:
             self.keepBrTags = 0
+        if "getPermission" in kwargs:
+            self.getPermission = kwargs['getPermission']
+        else:
+            self.getPermission = 0 
         try:
             # make it thread-safe
             if threading.activeCount() > 1:
@@ -36,4 +40,4 @@ class Extractor(object):
 
     def getHTML(self):
         self.reader = ByteArrayInputStream(self.data)
-        return str(self.extractor.Extract(self.reader, self.keepBrTags).toString())
+        return str(self.extractor.Extract(self.reader, self.keepBrTags, self.getPermission).toString())
