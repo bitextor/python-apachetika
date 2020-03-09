@@ -16,7 +16,7 @@ __version__ = '2.0.1'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
 def download_or_compile_jars(datapath):
-    if not exists(datapath+"/PDFExtract-2.0.jar") or not exists(datapath+"/PDFExtract.json"):
+    if not exists(datapath+"/PDFExtract.jar") or not exists(datapath+"/PDFExtract.json"):
         wd = os.getcwd()
         if not exists(datapath+"/pdf-extract"):
             subprocess.check_call(["git","clone","-b","poppler-rewrite","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
