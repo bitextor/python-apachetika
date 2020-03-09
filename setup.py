@@ -26,7 +26,7 @@ def download_or_compile_jars(datapath):
         os.chdir(datapath+"/pdf-extract")
         subprocess.check_call(["mvn", "package"])
         os.chdir(wd)
-        shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract-2.0.jar")
+        shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract.jar")
         shutil.move(datapath+'/pdf-extract/target/PDFExtract.json', datapath+"/PDFExtract.json")
             
             
