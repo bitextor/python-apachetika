@@ -34,6 +34,14 @@ Checkout the code:
     sudo dnf install -y python2-jpype
     sudo python setup.py install
 
+Also you can now directly install without explicitly running `setup.py` or checkout the code:
+
+**pip**
+
+    pip install python-pdfextract # Stable releases
+    pip install git+https://github.com/bitextor/python-pdfextract.git # master code
+    pip install git+https://github.com/bitextor/python-pdfextract.git@branchname # development "branchname" code
+
 
 ## Usage
 

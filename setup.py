@@ -1,6 +1,9 @@
 import tarfile
 from fnmatch import fnmatch
+import shutil
 from os.path import basename, exists, dirname, abspath, join
+import os
+import subprocess
 from distutils.core import setup
 #from setuptools import setup
 
@@ -9,16 +12,26 @@ try:
 except:
     from urllib.request import urlretrieve
 
-__version__ = '1.0.1.2'
+__version__ = '3.0.0'
 DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
 
-def download_jars(datapath):
-    jar_url = 'https://github.com/bitextor/pdf-extract/raw/master/runnable-jar/PDFExtract.jar'
-    jar_name = basename(jar_url)
-    if not exists(datapath+"/"+jar_name):
-        urlretrieve(jar_url, datapath+"/"+jar_name)
+def download_or_compile_jars(datapath):
+    if not exists(datapath+"/PDFExtract.jar") or not exists(datapath+"/PDFExtract.json"):
+        wd = os.getcwd()
+        if not exists(datapath+"/pdf-extract"):
+            subprocess.check_call(["git","clone","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
+        os.chdir(datapath+"/pdf-extract/cld3-Java")
+        subprocess.check_call(["ant", "jar"])
+        subprocess.check_call(["mvn", "install:install-file","-Dfile=cld3-java.jar","-DgroupId=cld3-java","-DartifactId=cld3-java","-Dversion=1.0","-Dpackaging=jar"])
+        os.chdir(datapath+"/pdf-extract")
+        subprocess.check_call(["mvn", "package"])
+        os.chdir(wd)
+        shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract.jar")
+        shutil.move(datapath+'/pdf-extract/target/PDFExtract.json', datapath+"/PDFExtract.json")
+            
+            
 
-download_jars(datapath=DATAPATH)
+download_or_compile_jars(datapath=DATAPATH)
 
 setup(
     name='python-pdfextract',
@@ -27,7 +40,8 @@ setup(
     package_dir={'': 'src'},
     package_data={
         'pdfextract': [
-            'data/PDFExtract.jar'
+            'data/PDFExtract.jar',
+            'data/PDFExtract.json'
         ],
     },
     install_requires=[
