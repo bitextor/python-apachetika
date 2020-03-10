@@ -19,7 +19,7 @@ def download_or_compile_jars(datapath):
     if not exists(datapath+"/PDFExtract.jar") or not exists(datapath+"/PDFExtract.json"):
         wd = os.getcwd()
         if not exists(datapath+"/pdf-extract"):
-            subprocess.check_call(["git","clone","-b","poppler-rewrite","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
+            subprocess.check_call(["git","clone","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
         os.chdir(datapath+"/pdf-extract/cld3-Java")
         subprocess.check_call(["ant", "jar"])
         subprocess.check_call(["mvn", "install:install-file","-Dfile=cld3-java.jar","-DgroupId=cld3-java","-DartifactId=cld3-java","-Dversion=1.0","-Dpackaging=jar"])
