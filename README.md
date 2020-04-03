@@ -17,7 +17,7 @@ The pdf-extract jar files will get fetched and included automatically when build
 
 Checkout the code:
 
-	git clone https://github.com/misja/python-pdfextract.git
+	git clone https://github.com/bitextor/python-pdfextract.git
 	cd python-pdfextract
 
 
