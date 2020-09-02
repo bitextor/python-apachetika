@@ -24,6 +24,8 @@ def download_or_compile_jars(datapath):
         subprocess.check_call(["ant", "jar"])
         subprocess.check_call(["mvn", "install:install-file","-Dfile=cld3-java.jar","-DgroupId=cld3-java","-DartifactId=cld3-java","-Dversion=1.0","-Dpackaging=jar"])
         os.chdir(datapath+"/pdf-extract")
+        subprocess.check_call(["git", "pull"])
+        subprocess.check_call(["git", "submodule", "update", "--init", "--recursive"])
         subprocess.check_call(["mvn", "package"])
         os.chdir(wd)
         shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract.jar")

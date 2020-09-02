@@ -51,6 +51,12 @@ Be sure to have set `JAVA_HOME` properly since `jpype` depends on this setting.
     from pdfextract.extract import Extractor
     extractor = Extractor(pdf=your_pdf_data)
 
+
+An advanced way to create the Extractor is:
+    extractor = Extractor(pdf=your_pdf_data, keepBrTags=0, getPermission=0, logFilePath="", verbose=0, configFile="", timeout=0, sentenceJoinPath="", kenlmPath="")
+
+which contains the same arguments as PDFExtract [command line options](https://github.com/bitextor/pdf-extract/#command-line-pdf-extraction).
+
 Then, to extract relevant content:
 
     extracted_html = extractor.extract()
