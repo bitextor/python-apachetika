@@ -41,10 +41,14 @@ class Extractor(object):
             self.timeout = 0
         if "kenlmPath" in kwargs:
             self.kenlmPath = kwargs['kenlmPath']
+            if self.kenlmPath == "":
+                self.kenlmPath = None
         else:
             self.kenlmPath = None
         if "sentenceJoinPath" in kwargs:
             self.sentenceJoinPath = kwargs['sentenceJoinPath']
+            if self.sentenceJoinPath == "":
+                self.sentenceJoinPath = None
         else:
             self.sentenceJoinPath = None
         try:
