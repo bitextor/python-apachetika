@@ -4,57 +4,44 @@ import shutil
 from os.path import basename, exists, dirname, abspath, join
 import os
 import subprocess
-from distutils.core import setup
-#from setuptools import setup
+#from distutils.core import setup
+from setuptools import setup
 
 try:
     from urllib import urlretrieve
 except:
     from urllib.request import urlretrieve
 
-__version__ = '3.0.0'
-DATAPATH = join(abspath(dirname((__file__))), 'src/pdfextract/data')
+__version__ = '2.6.0'
+DATAPATH = join(abspath(dirname((__file__))), 'src/apachetika/data')
 
-def download_or_compile_jars(datapath):
-    if not exists(datapath+"/PDFExtract.jar") or not exists(datapath+"/PDFExtract.json"):
-        wd = os.getcwd()
-        if not exists(datapath+"/pdf-extract"):
-            subprocess.check_call(["git","clone","https://github.com/bitextor/pdf-extract.git","--recursive",datapath+"/pdf-extract"])
-        os.chdir(datapath+"/pdf-extract/cld3-Java")
-        subprocess.check_call(["ant", "jar"])
-        subprocess.check_call(["mvn", "install:install-file","-Dfile=cld3-java.jar","-DgroupId=cld3-java","-DartifactId=cld3-java","-Dversion=1.0","-Dpackaging=jar"])
-        os.chdir(datapath+"/pdf-extract")
-        subprocess.check_call(["git", "pull"])
-        subprocess.check_call(["git", "submodule", "update", "--init", "--recursive"])
-        subprocess.check_call(["mvn", "package"])
-        os.chdir(wd)
-        shutil.move(datapath+'/pdf-extract/target/PDFExtract-2.0.jar', datapath+"/PDFExtract.jar")
-        shutil.move(datapath+'/pdf-extract/target/PDFExtract.json', datapath+"/PDFExtract.json")
-            
-            
+def download_jar(datapath):
+    if not exists(datapath+"/tika-app.jar"):
+        subprocess.check_call(["wget","https://dlcdn.apache.org/tika/2.6.0/tika-app-2.6.0.jar"])
+        shutil.move('tika-app-2.6.0.jar', datapath+"/tika-app.jar")
 
-download_or_compile_jars(datapath=DATAPATH)
+
+download_jar(datapath=DATAPATH)
 
 setup(
-    name='python-pdfextract',
+    name='python-apachetika',
     version=__version__,
-    packages=['pdfextract', 'pdfextract.extract'],
-    package_dir={'': 'src'},
+    packages=['apachetika', 'apachetika.extract'],
+    package_dir={'':'src'},
     package_data={
-        'pdfextract': [
-            'data/PDFExtract.jar',
-            'data/PDFExtract.json'
+        'apachetika': [
+            'data/tika-app.jar'
         ],
     },
     install_requires=[
         'JPype1',
         'chardet',
     ],
-    author='Misja Hoebe, Leopoldo Pla',
-    author_email='misja.hoebe@gmail.com, lpla@dlsi.ua.es',
-    maintainer='Matthew Russell, Leopoldo Pla',
-    maintainer_email='ptwobrussell@gmail.com, lpla@dlsi.ua.es',
-    url='https://github.com/bitextor/python-pdfextract/',
+    author='Aaron Galiano',
+    author_email='aaron.galiano@ua.es',
+    maintainer='Aaron Galiano',
+    maintainer_email='aaron.galiano@ua.es',
+    url='https://github.com/bitextor/python-apachetika/',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -64,7 +51,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Natural Language :: English',
     ],
-    keywords='pdfextract',
+    keywords='apachetika',
     license='Apache 2.0',
-    description='Python interface to pdf-extract, HTML Extraction from PDF pages'
+    description='Python interface to Apache Tika, text extraction from PDF pages'
 )

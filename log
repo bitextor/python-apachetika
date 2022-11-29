@@ -1,0 +1,49 @@
+running install
+running bdist_egg
+running egg_info
+writing src/python_apachetika.egg-info/PKG-INFO
+writing dependency_links to src/python_apachetika.egg-info/dependency_links.txt
+writing requirements to src/python_apachetika.egg-info/requires.txt
+writing top-level names to src/python_apachetika.egg-info/top_level.txt
+reading manifest file 'src/python_apachetika.egg-info/SOURCES.txt'
+adding license file 'LICENSE.txt'
+writing manifest file 'src/python_apachetika.egg-info/SOURCES.txt'
+installing library code to build/bdist.linux-x86_64/egg
+running install_lib
+running build_py
+creating build/bdist.linux-x86_64/egg
+creating build/bdist.linux-x86_64/egg/apachetika
+copying build/lib/apachetika/__init__.py -> build/bdist.linux-x86_64/egg/apachetika
+creating build/bdist.linux-x86_64/egg/apachetika/data
+copying build/lib/apachetika/data/tika-app.jar -> build/bdist.linux-x86_64/egg/apachetika/data
+creating build/bdist.linux-x86_64/egg/apachetika/extract
+copying build/lib/apachetika/extract/__init__.py -> build/bdist.linux-x86_64/egg/apachetika/extract
+byte-compiling build/bdist.linux-x86_64/egg/apachetika/__init__.py to __init__.cpython-38.pyc
+byte-compiling build/bdist.linux-x86_64/egg/apachetika/extract/__init__.py to __init__.cpython-38.pyc
+creating build/bdist.linux-x86_64/egg/EGG-INFO
+copying src/python_apachetika.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying src/python_apachetika.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying src/python_apachetika.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying src/python_apachetika.egg-info/requires.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+copying src/python_apachetika.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+creating 'dist/python_apachetika-2.6.0-py3.8.egg' and adding 'build/bdist.linux-x86_64/egg' to it
+removing 'build/bdist.linux-x86_64/egg' (and everything under it)
+Processing python_apachetika-2.6.0-py3.8.egg
+Removing /home/agaliano/miniconda3/envs/bitextor-dir2warc/lib/python3.8/site-packages/python_apachetika-2.6.0-py3.8.egg
+Copying python_apachetika-2.6.0-py3.8.egg to /home/agaliano/miniconda3/envs/bitextor-dir2warc/lib/python3.8/site-packages
+python-apachetika 2.6.0 is already the active version in easy-install.pth
+
+Installed /home/agaliano/miniconda3/envs/bitextor-dir2warc/lib/python3.8/site-packages/python_apachetika-2.6.0-py3.8.egg
+Processing dependencies for python-apachetika==2.6.0
+Searching for chardet==5.0.0
+Best match: chardet 5.0.0
+Adding chardet 5.0.0 to easy-install.pth file
+Installing chardetect script to /home/agaliano/miniconda3/envs/bitextor-dir2warc/bin
+
+Using /home/agaliano/miniconda3/envs/bitextor-dir2warc/lib/python3.8/site-packages
+Searching for JPype1==1.4.0
+Best match: JPype1 1.4.0
+Adding JPype1 1.4.0 to easy-install.pth file
+
+Using /home/agaliano/miniconda3/envs/bitextor-dir2warc/lib/python3.8/site-packages
+Finished processing dependencies for python-apachetika==2.6.0
