@@ -2,12 +2,17 @@ from jpype import *
 import chardet
 import threading
 import subprocess
+import os
+import imp
 from subprocess import PIPE, Popen
 
 lock = threading.Lock()
 
-tika_path = "../data/tika-app.jar"
-
+tika_path = ""
+for top, dirs, files in os.walk(imp.find_module('apachetika')[1]+'/data'):
+        for nm in files:
+            if nm[-4:] == ".jar":
+                tika_path = os.path.join(top, nm)
 
 class Extractor(object):
     extractor = None
